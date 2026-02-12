@@ -1,4 +1,9 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateWorkoutDto } from './dto/create-workout.dto';
 import { UpdateWorkoutDto } from './dto/update-workout.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -13,31 +18,100 @@ export class WorkoutService {
     private workoutRepository: Repository<Workout>,
   ) {}
 
-  create(createWorkoutDto: CreateWorkoutDto) {
+  async create(createWorkoutDto: CreateWorkoutDto) {
     try {
-      return this.workoutRepository.save(createWorkoutDto);
+      const workoutExists = await this.workoutRepository.findOneBy({
+        name: createWorkoutDto.name,
+      });
+
+      if (workoutExists) {
+        throw new BadRequestException('Workout name already exists');
+      }
+
+      const workout = this.workoutRepository.create(createWorkoutDto);
+      return this.workoutRepository.save(workout);
     } catch (error: unknown) {
-      console.log(error);
       handleDatabaseErrors(error);
+
+      console.log('Fatal error on workout creation', error);
+
       throw new InternalServerErrorException(
         'Unexpected error on workout creation',
       );
     }
   }
 
-  findAll() {
-    return this.workoutRepository.find();
+  async findAll() {
+    try {
+      const workouts = await this.workoutRepository.find();
+
+      if (!workouts || workouts.length === 0) {
+        throw new NotFoundException('Workouts not found');
+      }
+
+      return workouts;
+    } catch (error: unknown) {
+      handleDatabaseErrors(error);
+
+      console.log('Fatal error on workout find all', error);
+
+      throw new InternalServerErrorException(
+        'Unexpected error on workout find all',
+      );
+    }
   }
 
-  findOne(id: string) {
-    return this.workoutRepository.findOneBy({ id });
+  async findOne(id: string) {
+    try {
+      const workout = await this.workoutRepository.findOneBy({ id });
+
+      if (!workout) {
+        throw new NotFoundException(`Workout ${id} not found`);
+      }
+
+      return workout;
+    } catch (error: unknown) {
+      handleDatabaseErrors(error);
+
+      console.log('Fatal error on workout find one', error);
+
+      throw new InternalServerErrorException(
+        'Unexpected error on workout find one',
+      );
+    }
   }
 
   update(id: string, updateWorkoutDto: UpdateWorkoutDto) {
-    return this.workoutRepository.update(id, updateWorkoutDto);
+    try {
+      return this.workoutRepository.update(id, updateWorkoutDto);
+    } catch (error: unknown) {
+      handleDatabaseErrors(error);
+
+      console.log('Fatal error on workout update', error);
+
+      throw new InternalServerErrorException(
+        'Unexpected error on workout update',
+      );
+    }
   }
 
-  remove(id: string) {
-    return this.workoutRepository.delete(id);
+  async remove(id: string) {
+    try {
+      const workout = await this.workoutRepository.findOneBy({ id });
+
+      if (!workout) {
+        throw new NotFoundException(`Workout ${id} not found`);
+      }
+
+      return this.workoutRepository.remove(workout);
+    } catch (error: unknown) {
+      handleDatabaseErrors(error);
+
+      console.log('Fatal error on workout remove', error);
+
+      throw new InternalServerErrorException(
+        'Unexpected error on workout remove',
+      );
+    }
   }
 }

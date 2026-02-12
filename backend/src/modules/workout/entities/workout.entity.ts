@@ -5,10 +5,10 @@ import { WorkoutExercise } from 'src/modules/workout-exercise/entities/workout-e
 
 @Entity()
 export class Workout extends CommonEntity implements WorkoutInterface {
-  @Column()
+  @Column({ type: 'varchar', length: 255, nullable: false })
   name: string;
 
-  @Column()
+  @Column({ type: 'varchar', length: 255, nullable: true })
   description: string;
 
   @OneToMany(

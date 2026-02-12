@@ -21,7 +21,6 @@ export class CreateExerciseDto implements CretableExerciseInterface {
   @IsOptional()
   description?: string;
 
-  @IsString()
   @IsEnum(MuscleGroup)
   muscleGroup: MuscleGroup;
 

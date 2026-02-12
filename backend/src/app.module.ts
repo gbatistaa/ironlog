@@ -10,6 +10,7 @@ import { WorkoutExerciseModule } from './modules/workout-exercise/workout-exerci
   imports: [
     ExerciseModule,
     WorkoutModule,
+    WorkoutExerciseModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DB_HOST,
@@ -20,7 +21,6 @@ import { WorkoutExerciseModule } from './modules/workout-exercise/workout-exerci
       entities: [__dirname + '/**/*.entity.{js,ts}'],
       synchronize: true,
     }),
-    WorkoutExerciseModule,
   ],
   controllers: [AppController],
   providers: [AppService],

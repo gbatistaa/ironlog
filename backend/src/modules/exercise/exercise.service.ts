@@ -11,10 +11,14 @@ import { Exercise } from './entities/exercise.entity';
 import { handleDatabaseErrors } from '../common/errors/treatErrors';
 import { ExerciseDto } from './dto/exercise.dto';
 import { plainToInstance } from 'class-transformer';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class ExerciseService {
-  constructor(private readonly repository: Repository<Exercise>) {}
+  constructor(
+    @InjectRepository(Exercise)
+    private readonly repository: Repository<Exercise>,
+  ) {}
 
   async create(createExerciseDto: CreateExerciseDto): Promise<ExerciseDto> {
     try {
