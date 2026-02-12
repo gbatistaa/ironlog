@@ -9,10 +9,14 @@ import { UpdateWorkoutExerciseDto } from './dto/update-workout-exercise.dto';
 import { Repository } from 'typeorm';
 import { WorkoutExercise } from './entities/workout-exercise.entity';
 import { handleDatabaseErrors } from '../common/errors/treatErrors';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class WorkoutExerciseService {
-  constructor(private readonly repo: Repository<WorkoutExercise>) {}
+  constructor(
+    @InjectRepository(WorkoutExercise)
+    private readonly repo: Repository<WorkoutExercise>,
+  ) {}
 
   async create(createWorkoutExerciseDto: CreateWorkoutExerciseDto) {
     try {
