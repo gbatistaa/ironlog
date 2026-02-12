@@ -1,0 +1,440 @@
+@baseUrl = http://localhost:4000/api
+
+###############################################################################
+# EXERCISE
+###############################################################################
+
+### ==================== CREATE ====================
+
+### Criar exercício - Supino Reto
+POST {{baseUrl}}/exercise
+Content-Type: application/json
+
+{
+  "name": "Supino Reto",
+  "description": "Exercício composto para peito com barra",
+  "muscleGroup": 0,
+  "videoUrl": "https://www.youtube.com/watch?v=supino-reto"
+}
+
+### Criar exercício - Supino Inclinado
+POST {{baseUrl}}/exercise
+Content-Type: application/json
+
+{
+  "name": "Supino Inclinado",
+  "description": "Exercício para parte superior do peito",
+  "muscleGroup": 0
+}
+
+### Criar exercício - Puxada Frontal
+POST {{baseUrl}}/exercise
+Content-Type: application/json
+
+{
+  "name": "Puxada Frontal",
+  "description": "Exercício composto para costas na polia alta",
+  "muscleGroup": 1,
+  "videoUrl": "https://www.youtube.com/watch?v=puxada-frontal"
+}
+
+### Criar exercício - Remada Curvada
+POST {{baseUrl}}/exercise
+Content-Type: application/json
+
+{
+  "name": "Remada Curvada",
+  "description": "Exercício composto para costas com barra",
+  "muscleGroup": 1
+}
+
+### Criar exercício - Agachamento Livre
+POST {{baseUrl}}/exercise
+Content-Type: application/json
+
+{
+  "name": "Agachamento Livre",
+  "description": "Exercício composto para pernas com barra",
+  "muscleGroup": 2,
+  "videoUrl": "https://www.youtube.com/watch?v=agachamento"
+}
+
+### Criar exercício - Leg Press
+POST {{baseUrl}}/exercise
+Content-Type: application/json
+
+{
+  "name": "Leg Press",
+  "description": "Exercício para pernas na máquina",
+  "muscleGroup": 2
+}
+
+### Criar exercício - Desenvolvimento Militar
+POST {{baseUrl}}/exercise
+Content-Type: application/json
+
+{
+  "name": "Desenvolvimento Militar",
+  "description": "Exercício composto para ombros com barra",
+  "muscleGroup": 3
+}
+
+### Criar exercício - Rosca Direta
+POST {{baseUrl}}/exercise
+Content-Type: application/json
+
+{
+  "name": "Rosca Direta",
+  "description": "Exercício isolado para bíceps com barra",
+  "muscleGroup": 4,
+  "videoUrl": "https://www.youtube.com/watch?v=rosca-direta"
+}
+
+### Criar exercício - Tríceps Corda
+POST {{baseUrl}}/exercise
+Content-Type: application/json
+
+{
+  "name": "Tríceps Corda",
+  "description": "Exercício isolado para tríceps na polia",
+  "muscleGroup": 4
+}
+
+### Criar exercício - Abdominal Crunch
+POST {{baseUrl}}/exercise
+Content-Type: application/json
+
+{
+  "name": "Abdominal Crunch",
+  "description": "Exercício isolado para abdômen",
+  "muscleGroup": 5
+}
+
+### Criar exercício - Panturrilha em Pé
+POST {{baseUrl}}/exercise
+Content-Type: application/json
+
+{
+  "name": "Panturrilha em Pé",
+  "description": "Exercício isolado para panturrilhas",
+  "muscleGroup": 6
+}
+
+### Criar exercício - Esteira
+POST {{baseUrl}}/exercise
+Content-Type: application/json
+
+{
+  "name": "Esteira",
+  "description": "Cardio na esteira",
+  "muscleGroup": 7
+}
+
+### ==================== READ ====================
+
+### Buscar todos os exercícios
+GET {{baseUrl}}/exercise
+
+### Buscar exercício por ID (substituir pelo ID real)
+@exerciseId = e4526b14-ce54-4526-96f3-ce13719dec6b
+GET {{baseUrl}}/exercise/{{exerciseId}}
+
+### ==================== UPDATE ====================
+
+### Atualizar exercício - mudar nome e descrição
+PATCH {{baseUrl}}/exercise/{{exerciseId}}
+Content-Type: application/json
+
+{
+  "name": "Supino Reto com Barra",
+  "description": "Exercício composto para peitoral maior com barra olímpica"
+}
+
+### Atualizar exercício - adicionar videoUrl
+PATCH {{baseUrl}}/exercise/{{exerciseId}}
+Content-Type: application/json
+
+{
+  "videoUrl": "https://www.youtube.com/watch?v=novo-video"
+}
+
+### ==================== DELETE ====================
+
+### Deletar exercício por ID
+DELETE {{baseUrl}}/exercise/{{exerciseId}}
+
+
+###############################################################################
+# WORKOUT
+###############################################################################
+
+### ==================== CREATE ====================
+
+### Criar treino - Treino A (Peito e Tríceps)
+POST {{baseUrl}}/workout
+Content-Type: application/json
+
+{
+  "name": "Treino A - Peito e Tríceps",
+  "description": "Treino focado em peito e tríceps"
+}
+
+### Criar treino - Treino B (Costas e Bíceps)
+POST {{baseUrl}}/workout
+Content-Type: application/json
+
+{
+  "name": "Treino B - Costas e Bíceps",
+  "description": "Treino focado em costas e bíceps"
+}
+
+### Criar treino - Treino C (Pernas)
+POST {{baseUrl}}/workout
+Content-Type: application/json
+
+{
+  "name": "Treino C - Pernas",
+  "description": "Treino focado em pernas completo"
+}
+
+### Criar treino - Treino D (Ombros e Abdômen)
+POST {{baseUrl}}/workout
+Content-Type: application/json
+
+{
+  "name": "Treino D - Ombros e Abdômen",
+  "description": "Treino focado em ombros e abdômen"
+}
+
+### Criar treino - Treino Full Body
+POST {{baseUrl}}/workout
+Content-Type: application/json
+
+{
+  "name": "Treino Full Body",
+  "description": "Treino completo de corpo inteiro"
+}
+
+### Criar treino - Treino Cardio
+POST {{baseUrl}}/workout
+Content-Type: application/json
+
+{
+  "name": "Treino Cardio"
+}
+
+### ==================== READ ====================
+
+### Buscar todos os treinos
+GET {{baseUrl}}/workout
+
+### Buscar treino por ID (substituir pelo ID real)
+@workoutId = b3c7b96c-318f-431c-8928-e4f3c83fda5e
+GET {{baseUrl}}/workout/{{workoutId}}
+
+### ==================== UPDATE ====================
+
+### Atualizar treino - mudar nome
+PATCH {{baseUrl}}/workout/{{workoutId}}
+Content-Type: application/json
+
+{
+  "name": "Treino A - Peito, Ombros e Tríceps"
+}
+
+### Atualizar treino - mudar descrição
+PATCH {{baseUrl}}/workout/{{workoutId}}
+Content-Type: application/json
+
+{
+  "description": "Treino push focado em peito, ombros e tríceps"
+}
+
+### ==================== DELETE ====================
+
+### Deletar treino por ID
+DELETE {{baseUrl}}/workout/{{workoutId}}
+
+
+###############################################################################
+# WORKOUT-EXERCISE (Relação Treino <-> Exercício)
+###############################################################################
+
+### ==================== CREATE ====================
+
+### Criar relação - Supino Reto no Treino A (pesado)
+@workoutIdForLink = b3c7b96c-318f-431c-8928-e4f3c83fda5e
+@exerciseIdForLink = ee899ff3-251c-4f7a-8bf0-bf642d02de99
+POST {{baseUrl}}/workout-exercise
+Content-Type: application/json
+
+{
+  "workoutId": "{{workoutIdForLink}}",
+  "exerciseId": "{{exerciseIdForLink}}",
+  "sets": 4,
+  "reps": 8,
+  "weight": 80.0,
+  "restTime": 120
+}
+
+### Criar relação - Supino Inclinado no Treino A
+POST {{baseUrl}}/workout-exercise
+Content-Type: application/json
+
+{
+  "workoutId": "{{workoutIdForLink}}",
+  "exerciseId": "{{exerciseIdForLink}}",
+  "sets": 3,
+  "reps": 10,
+  "weight": 60.5,
+  "restTime": 90
+}
+
+### Criar relação - Tríceps Corda no Treino A
+POST {{baseUrl}}/workout-exercise
+Content-Type: application/json
+
+{
+  "workoutId": "{{workoutIdForLink}}",
+  "exerciseId": "{{exerciseIdForLink}}",
+  "sets": 3,
+  "reps": 12,
+  "weight": 25.0,
+  "restTime": 60
+}
+
+### Criar relação - Puxada Frontal no Treino B
+POST {{baseUrl}}/workout-exercise
+Content-Type: application/json
+
+{
+  "workoutId": "{{workoutIdForLink}}",
+  "exerciseId": "{{exerciseIdForLink}}",
+  "sets": 4,
+  "reps": 10,
+  "weight": 70.0,
+  "restTime": 90
+}
+
+### Criar relação - Remada Curvada no Treino B
+POST {{baseUrl}}/workout-exercise
+Content-Type: application/json
+
+{
+  "workoutId": "{{workoutIdForLink}}",
+  "exerciseId": "{{exerciseIdForLink}}",
+  "sets": 4,
+  "reps": 8,
+  "weight": 65.0,
+  "restTime": 90
+}
+
+### Criar relação - Rosca Direta no Treino B
+POST {{baseUrl}}/workout-exercise
+Content-Type: application/json
+
+{
+  "workoutId": "{{workoutIdForLink}}",
+  "exerciseId": "{{exerciseIdForLink}}",
+  "sets": 3,
+  "reps": 12,
+  "weight": 20.0,
+  "restTime": 60
+}
+
+### Criar relação - Agachamento no Treino C (pesado)
+POST {{baseUrl}}/workout-exercise
+Content-Type: application/json
+
+{
+  "workoutId": "{{workoutIdForLink}}",
+  "exerciseId": "{{exerciseIdForLink}}",
+  "sets": 5,
+  "reps": 5,
+  "weight": 120.0,
+  "restTime": 180
+}
+
+### Criar relação - Leg Press no Treino C
+POST {{baseUrl}}/workout-exercise
+Content-Type: application/json
+
+{
+  "workoutId": "{{workoutIdForLink}}",
+  "exerciseId": "{{exerciseIdForLink}}",
+  "sets": 4,
+  "reps": 12,
+  "weight": 200.0,
+  "restTime": 90
+}
+
+### Criar relação - Panturrilha no Treino C
+POST {{baseUrl}}/workout-exercise
+Content-Type: application/json
+
+{
+  "workoutId": "{{workoutIdForLink}}",
+  "exerciseId": "{{exerciseIdForLink}}",
+  "sets": 4,
+  "reps": 15,
+  "weight": 80.0,
+  "restTime": 45
+}
+
+### Criar relação - Esteira no Treino Cardio
+POST {{baseUrl}}/workout-exercise
+Content-Type: application/json
+
+{
+  "workoutId": "{{workoutIdForLink}}",
+  "exerciseId": "{{exerciseIdForLink}}",
+  "sets": 1,
+  "reps": 1,
+  "weight": 0,
+  "restTime": 0
+}
+
+### ==================== READ ====================
+
+### Buscar todas as relações workout-exercise
+GET {{baseUrl}}/workout-exercise
+
+### Buscar relação por ID (substituir pelo ID real)
+@workoutExerciseId = 79e12ebc-7d45-4d9a-8efe-9793476ad159
+GET {{baseUrl}}/workout-exercise/{{workoutExerciseId}}
+
+### ==================== UPDATE ====================
+
+### Atualizar relação - aumentar carga e diminuir reps
+PATCH {{baseUrl}}/workout-exercise/{{workoutExerciseId}}
+Content-Type: application/json
+
+{
+  "weight": 85.0,
+  "reps": 6
+}
+
+### Atualizar relação - aumentar séries e tempo de descanso
+PATCH {{baseUrl}}/workout-exercise/{{workoutExerciseId}}
+Content-Type: application/json
+
+{
+  "sets": 5,
+  "restTime": 150
+}
+
+### Atualizar relação - sobrecarga progressiva completa
+PATCH {{baseUrl}}/workout-exercise/{{workoutExerciseId}}
+Content-Type: application/json
+
+{
+  "sets": 4,
+  "reps": 10,
+  "weight": 90.0,
+  "restTime": 120
+}
+
+### ==================== DELETE ====================
+
+### Deletar relação workout-exercise por ID
+DELETE {{baseUrl}}/workout-exercise/{{workoutExerciseId}}
