@@ -13,7 +13,7 @@ Content-Type: application/json
 {
   "name": "Supino Reto",
   "description": "Exercício composto para peito com barra",
-  "muscleGroup": 0,
+  "muscleGroup": "chest",
   "videoUrl": "https://www.youtube.com/watch?v=supino-reto"
 }
 
@@ -24,7 +24,7 @@ Content-Type: application/json
 {
   "name": "Supino Inclinado",
   "description": "Exercício para parte superior do peito",
-  "muscleGroup": 0
+  "muscleGroup": "chest"
 }
 
 ### Criar exercício - Puxada Frontal
@@ -34,7 +34,7 @@ Content-Type: application/json
 {
   "name": "Puxada Frontal",
   "description": "Exercício composto para costas na polia alta",
-  "muscleGroup": 1,
+  "muscleGroup": "back",
   "videoUrl": "https://www.youtube.com/watch?v=puxada-frontal"
 }
 
@@ -45,7 +45,7 @@ Content-Type: application/json
 {
   "name": "Remada Curvada",
   "description": "Exercício composto para costas com barra",
-  "muscleGroup": 1
+  "muscleGroup": "back"
 }
 
 ### Criar exercício - Agachamento Livre
@@ -55,7 +55,7 @@ Content-Type: application/json
 {
   "name": "Agachamento Livre",
   "description": "Exercício composto para pernas com barra",
-  "muscleGroup": 2,
+  "muscleGroup": "legs",
   "videoUrl": "https://www.youtube.com/watch?v=agachamento"
 }
 
@@ -66,7 +66,7 @@ Content-Type: application/json
 {
   "name": "Leg Press",
   "description": "Exercício para pernas na máquina",
-  "muscleGroup": 2
+  "muscleGroup": "legs"
 }
 
 ### Criar exercício - Desenvolvimento Militar
@@ -76,7 +76,7 @@ Content-Type: application/json
 {
   "name": "Desenvolvimento Militar",
   "description": "Exercício composto para ombros com barra",
-  "muscleGroup": 3
+  "muscleGroup": "shoulders"
 }
 
 ### Criar exercício - Rosca Direta
@@ -86,7 +86,7 @@ Content-Type: application/json
 {
   "name": "Rosca Direta",
   "description": "Exercício isolado para bíceps com barra",
-  "muscleGroup": 4,
+  "muscleGroup": "arms",
   "videoUrl": "https://www.youtube.com/watch?v=rosca-direta"
 }
 
@@ -97,7 +97,7 @@ Content-Type: application/json
 {
   "name": "Tríceps Corda",
   "description": "Exercício isolado para tríceps na polia",
-  "muscleGroup": 4
+  "muscleGroup": "arms"
 }
 
 ### Criar exercício - Abdominal Crunch
@@ -107,7 +107,7 @@ Content-Type: application/json
 {
   "name": "Abdominal Crunch",
   "description": "Exercício isolado para abdômen",
-  "muscleGroup": 5
+  "muscleGroup": "core"
 }
 
 ### Criar exercício - Panturrilha em Pé
@@ -117,7 +117,7 @@ Content-Type: application/json
 {
   "name": "Panturrilha em Pé",
   "description": "Exercício isolado para panturrilhas",
-  "muscleGroup": 6
+  "muscleGroup": "calves"
 }
 
 ### Criar exercício - Esteira
@@ -127,7 +127,7 @@ Content-Type: application/json
 {
   "name": "Esteira",
   "description": "Cardio na esteira",
-  "muscleGroup": 7
+  "muscleGroup": "cardio"
 }
 
 ### ==================== READ ====================

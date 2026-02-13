@@ -4,7 +4,6 @@ import {
   IsEnum,
   IsOptional,
   IsString,
-  IsUrl,
   MaxLength,
   MinLength,
 } from 'class-validator';
@@ -26,6 +25,5 @@ export class CreateExerciseDto implements CretableExerciseInterface {
 
   @IsString()
   @IsOptional()
-  @IsUrl()
   videoUrl?: string;
 }
