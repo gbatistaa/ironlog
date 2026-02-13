@@ -19,6 +19,7 @@ import { WorkoutExerciseModule } from './modules/workout-exercise/workout-exerci
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
       entities: [__dirname + '/**/*.entity.{js,ts}'],
+      migrations: [__dirname + '/data/migrations/*.{js,ts}'],
       synchronize: true,
     }),
   ],
