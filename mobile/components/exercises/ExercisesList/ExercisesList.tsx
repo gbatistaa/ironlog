@@ -12,14 +12,18 @@ import {
 import { useRouter } from "expo-router";
 import { atom, useAtom } from "jotai";
 import api from "@/api/api";
-import { ExerciseType } from "@/interfaces/exercises/exercise.interface";
+import { ExerciseType } from "@/common/interfaces/exercises/exercise.interface";
+import { Dumbbell, Pencil, Trash, Trash2 } from "lucide-react-native";
+import { MuscleGroupColor } from "@/common/enums/muscle-group-color.enum";
 
-const exercisesAtom = atom<ExerciseType[]>([]);
+export const exercisesAtom = atom<ExerciseType[]>([]);
+export const editingExerciseAtom = atom<ExerciseType | null>(null);
 
 export default function ExercisesList() {
   const [search, setSearch] = useState("");
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [exercises, setExercises] = useAtom(exercisesAtom);
+  const [, setEditingExercise] = useAtom(editingExerciseAtom);
 
   const router = useRouter();
 
@@ -33,10 +37,17 @@ export default function ExercisesList() {
   useEffect(() => {
     const fetchExercises = async () => {
       const { data } = await api.get<ExerciseType[]>("/exercise");
-      setExercises(data);
+      setExercises(
+        data.sort((a, b) => a.muscleGroup.localeCompare(b.muscleGroup)),
+      );
     };
     fetchExercises();
   }, [setExercises]);
+
+  const handleEditExercise = (exercise: ExerciseType) => {
+    setEditingExercise(exercise);
+    router.push(`/exercises/${exercise.id}`);
+  };
 
   return (
     <View className="flex gap-4">
@@ -54,18 +65,55 @@ export default function ExercisesList() {
         />
       </Animated.View>
       <Pressable
-        onPress={() => router.push("/exercises/modal")}
+        onPress={() => router.push("/exercises/new")}
         className="bg-[#38bdf8]/10 active:bg-[#38bdf8]/20 mt-4 py-3 border-[#38bdf8]/20 border-2 border-dotted rounded-xl"
       >
         <Text className="font-bold text-white text-base text-center">
           Add Exercise
         </Text>
       </Pressable>
-      <View className="flex gap-2">
+      <View className="flex justify-center gap-2">
         {exercises.map((exercise) => (
-          <View key={exercise.id} className="flex flex-row gap-2">
-            <Text className="text-white">{exercise.name}</Text>
-            <Text className="text-white">{exercise.muscleGroup}</Text>
+          <View
+            key={exercise.id}
+            className="flex flex-row items-center gap-2 bg-[#1e293b] p-4 rounded-xl"
+          >
+            <View className="flex justify-center items-center bg-[#38bdf8]/20 p-3 rounded-xl">
+              <Dumbbell color="#38bdf8" size={20} strokeWidth={2} />
+            </View>
+            <View className="flex flex-col flex-1 gap-1">
+              <Text className="font-bold text-white text-base">
+                {exercise.name}
+              </Text>
+              <View
+                className="self-start px-2 py-0.5 rounded-full"
+                style={{
+                  backgroundColor:
+                    MuscleGroupColor[exercise.muscleGroup] + "33",
+                }}
+              >
+                <Text
+                  className="font-bold text-sm capitalize"
+                  style={{ color: MuscleGroupColor[exercise.muscleGroup] }}
+                >
+                  {exercise.muscleGroup}
+                </Text>
+              </View>
+            </View>
+            <View className="flex flex-row gap-2">
+              <Pressable
+                onPress={() => handleEditExercise(exercise)}
+                className="active:bg-gray-500/40 p-2 rounded-xl"
+              >
+                <Pencil color="#9ca3af" size={20} strokeWidth={2} />
+              </Pressable>
+              <Pressable
+                onPress={() => console.log("Delete", exercise.id)}
+                className="active:bg-red-500/40 p-2 rounded-xl"
+              >
+                <Trash2 color="#ef4444" size={20} strokeWidth={2} />
+              </Pressable>
+            </View>
           </View>
         ))}
       </View>
