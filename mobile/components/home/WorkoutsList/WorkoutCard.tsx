@@ -1,7 +1,7 @@
 import CardTitle from "@/components/CardTitle";
 import { ChevronRight, Flame } from "lucide-react-native";
 import { View, Text, Pressable } from "react-native";
-import { WorkoutType } from "@/interfaces/home/WorkoutType";
+import { WorkoutType } from "@/interfaces/home/workout.interface";
 
 interface WorkoutCardProps {
   workout: WorkoutType;

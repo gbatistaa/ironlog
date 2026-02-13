@@ -1,5 +1,5 @@
 import { Pressable, Text, TextInput, View } from "react-native";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Animated, {
   useAnimatedStyle,
   withTiming,
@@ -10,12 +10,18 @@ import {
   TIMING_CONFIG,
 } from "@/app/workout/new";
 import { useRouter } from "expo-router";
+import { atom, useAtom } from "jotai";
+import api from "@/api/api";
+import { ExerciseType } from "@/interfaces/exercises/exercise.interface";
+
+const exercisesAtom = atom<ExerciseType[]>([]);
 
 export default function ExercisesList() {
-  const router = useRouter();
-
   const [search, setSearch] = useState("");
   const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const [exercises, setExercises] = useAtom(exercisesAtom);
+
+  const router = useRouter();
 
   const searchBorderStyle = useAnimatedStyle(() => ({
     borderColor: withTiming(
@@ -23,6 +29,14 @@ export default function ExercisesList() {
       TIMING_CONFIG,
     ),
   }));
+
+  useEffect(() => {
+    const fetchExercises = async () => {
+      const { data } = await api.get<ExerciseType[]>("/exercise");
+      setExercises(data);
+    };
+    fetchExercises();
+  }, [setExercises]);
 
   return (
     <View className="flex gap-4">
@@ -40,14 +54,21 @@ export default function ExercisesList() {
         />
       </Animated.View>
       <Pressable
-        onPress={() => router.push("/exercises/new")}
+        onPress={() => router.push("/exercises/modal")}
         className="bg-[#38bdf8]/10 active:bg-[#38bdf8]/20 mt-4 py-3 border-[#38bdf8]/20 border-2 border-dotted rounded-xl"
       >
         <Text className="font-bold text-white text-base text-center">
           Add Exercise
         </Text>
       </Pressable>
-      <View></View>
+      <View className="flex gap-2">
+        {exercises.map((exercise) => (
+          <View key={exercise.id} className="flex flex-row gap-2">
+            <Text className="text-white">{exercise.name}</Text>
+            <Text className="text-white">{exercise.muscleGroup}</Text>
+          </View>
+        ))}
+      </View>
     </View>
   );
 }

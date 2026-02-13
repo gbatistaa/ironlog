@@ -3,7 +3,7 @@ import { View, Text, Pressable } from "react-native";
 import WorkoutCard from "./WorkoutCard";
 import api from "@/api/api";
 import { useEffect, useState } from "react";
-import { WorkoutType } from "@/interfaces/home/WorkoutType";
+import { WorkoutType } from "@/interfaces/home/workout.interface";
 import { AxiosError } from "axios";
 import { useRouter } from "expo-router";
 

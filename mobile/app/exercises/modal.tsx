@@ -9,7 +9,7 @@ import Animated, {
   Easing,
 } from "react-native-reanimated";
 
-export default function NewExerciseScreen() {
+export default function ExerciseModalScreen() {
   const router = useRouter();
   const translateY = useSharedValue(500);
   const backdropOpacity = useSharedValue(0);

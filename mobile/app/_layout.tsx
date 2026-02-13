@@ -66,7 +66,7 @@ export default function RootLayout() {
           }}
         />
         <Stack.Screen
-          name="exercises/new"
+          name="exercises/modal"
           options={{
             presentation: "transparentModal",
             headerShown: false,
