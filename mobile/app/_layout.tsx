@@ -65,6 +65,14 @@ export default function RootLayout() {
             headerShown: false,
           }}
         />
+        <Stack.Screen
+          name="exercises/new"
+          options={{
+            presentation: "transparentModal",
+            headerShown: false,
+            animation: "none",
+          }}
+        />
       </Stack>
       <StatusBar style="auto" />
     </ThemeProvider>

@@ -1,5 +1,5 @@
 import { useColorScheme } from "@/hooks/use-color-scheme";
-import { Home } from "lucide-react-native";
+import { Dumbbell, Home } from "lucide-react-native";
 import { Tabs } from "expo-router";
 
 export default function TabLayout() {
@@ -24,6 +24,15 @@ export default function TabLayout() {
         options={{
           title: "Home",
           tabBarIcon: ({ color, size }) => <Home color={color} size={size} />,
+        }}
+      />
+      <Tabs.Screen
+        name="exercises/index"
+        options={{
+          title: "Exercises",
+          tabBarIcon: ({ color, size }) => (
+            <Dumbbell color={color} size={size} />
+          ),
         }}
       />
     </Tabs>

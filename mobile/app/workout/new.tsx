@@ -10,14 +10,15 @@ import Animated, {
 import api from "@/api/api";
 import { AxiosError } from "axios";
 
-const BORDER_DEFAULT = "rgba(255, 255, 255, 0.2)";
-const BORDER_FOCUSED = "#38bdf8";
-const TIMING_CONFIG = { duration: 200, easing: Easing.out(Easing.ease) };
+export const BORDER_DEFAULT = "rgba(255, 255, 255, 0.2)";
+export const BORDER_FOCUSED = "#38bdf8";
+export const TIMING_CONFIG = { duration: 200, easing: Easing.out(Easing.ease) };
 
 export default function NewWorkoutScreen() {
   const router = useRouter();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  const [exercises, setExercises] = useState([]);
   const [isNameFocused, setIsNameFocused] = useState(false);
   const [isDescriptionFocused, setIsDescriptionFocused] = useState(false);
 
@@ -74,7 +75,7 @@ export default function NewWorkoutScreen() {
         </Pressable>
       </View>
 
-      <View className="flex flex-col gap-5">
+      <View className="flex flex-col flex-1 gap-5 pb-14">
         <View className="flex flex-col gap-2">
           <Text className="font-semibold text-gray-400 text-sm">Name</Text>
           <Animated.View
@@ -105,7 +106,7 @@ export default function NewWorkoutScreen() {
             <TextInput
               value={description}
               onChangeText={setDescription}
-              placeholder="Describe your workout..."
+              placeholder="Describe your workout... (optional)"
               placeholderTextColor="#4b5563"
               multiline
               numberOfLines={3}
@@ -117,9 +118,21 @@ export default function NewWorkoutScreen() {
           </Animated.View>
         </View>
 
+        <View className="flex flex-col gap-2">
+          <Text className="font-semibold text-gray-400 text-sm">
+            Exercises ({exercises.length})
+          </Text>
+          <Pressable className="bg-[#38bdf8]/10 active:bg-[#38bdf8]/20 mt-4 py-3 border-[#38bdf8]/20 border-2 border-dotted rounded-xl">
+            <Text className="font-bold text-white text-base text-center">
+              Add Exercise
+            </Text>
+          </Pressable>
+        </View>
+
         <Pressable
-          className="bg-[#38bdf8] active:bg-[#38bdf8]/80 mt-4 py-3 rounded-xl"
+          className="bg-[#38bdf8] active:bg-[#38bdf8]/80 disabled:opacity-50 mt-auto py-3 rounded-xl"
           onPress={handleCreateWorkout}
+          disabled={name.trim() === ""}
         >
           <Text className="font-bold text-white text-base text-center">
             Create Workout
